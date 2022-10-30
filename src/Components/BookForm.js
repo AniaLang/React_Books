@@ -4,13 +4,26 @@ import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 
-function BookForm ({books, setBooks}) {
+function BookForm ({books, setBooks, checkedBooks}) {
 const [title, setTitle] = useState("")
 const [author, setAuthor ] = useState("")
+const [currentId, setCurrentId] = useState(0)
+
+const handleAdd = () => {
+  const id = currentId + 1
+  const book = {title, author, id}
+  setBooks([...books, book ])
+  setCurrentId(id)
+}
+
+const handleDelete = () => {
+  setBooks(books.filter(b => !checkedBooks.includes(b)))
+
+}
 //TODO -> empty string validation
 // -> clear inputs
   return (
-<Form>
+<Form> 
   <Row>
     <Col>
     <Form.Group className="mb-3">
@@ -25,16 +38,15 @@ const [author, setAuthor ] = useState("")
       </Form.Group>    
     </Col>
   </Row>
-  <Button variant="success" type="button" onClick={e => setBooks([...books, {title, author}])}>
+  <Button variant="success" type="button" onClick={e => handleAdd()}>
         Add
-      </Button>{' '}
-      <Button variant="danger" type="button">
-        Delete
       </Button>{' '}
       <Button variant="warning" type="button">
         Edit
+      </Button>{' '}
+      <Button variant="danger" type="button" onClick={e => handleDelete()} >
+        Delete
       </Button>
-  
 </Form>
   )
 }
