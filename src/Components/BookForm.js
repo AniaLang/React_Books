@@ -41,10 +41,7 @@ const handleDelete = () => {
   <Button variant="success" type="button" onClick={e => handleAdd()}>
         Add
       </Button>{' '}
-      <Button variant="warning" type="button">
-        Edit
-      </Button>{' '}
-      <Button variant="danger" type="button" onClick={e => handleDelete()} >
+  <Button variant="danger" type="button" onClick={e => handleDelete()} >
         Delete
       </Button>
 </Form>
