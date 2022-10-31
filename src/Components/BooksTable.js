@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import EditModal from './EditModal';
 import { useState } from 'react'
+import StarsRating from './StartsRating';
 
 function BooksTable({books, checkedBooks, setCheckedBooks, setBooks}) {
     const [modalShow, setModalShow] = useState(false);
@@ -25,7 +26,7 @@ function BooksTable({books, checkedBooks, setCheckedBooks, setBooks}) {
     }
 
 return (
-    <Table striped>
+    <Table>
         <thead>
             <tr>
                 <th>#</th>
@@ -43,6 +44,9 @@ return (
                     </td>
                     <td>{book.title}</td>
                     <td>{book.author}</td>
+                    <td>
+                        <StarsRating/>
+                    </td>
                 </tr>)}
             </tbody>
             {modalShow && <EditModal
