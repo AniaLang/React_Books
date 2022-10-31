@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 
-function BookForm ({books, setBooks, checkedBooks}) {
+function BookForm ({books, setBooks, checkedBooks, setCheckedBooks}) {
   const maxId = () => Math.max(...books.map(b => b.id))
 
   const [title, setTitle] = useState("")
@@ -13,20 +13,25 @@ function BookForm ({books, setBooks, checkedBooks}) {
 
 
 const handleAdd = () => {
-  if(title === "" || author === ""){
-    return
+  const clearInputs = () => {
+    setTitle("")
+    setAuthor("")
   }
-  const rate = 0
-  const id = currentId + 1
-  const book = {title, author, id, rate}
+  if(books.some(b => b.title === title && b.author === author)){
+    clearInputs()
+      return
+    }
+    const rate = 0
+    const id = currentId + 1
+    const book = {title, author, id, rate}
   setBooks([...books, book ])
   setCurrentId(id)
-  setTitle("")
-  setAuthor("")
+  clearInputs()
 }
 
 const handleDelete = () => {
   setBooks(books.filter(b => !checkedBooks.includes(b)))
+  setCheckedBooks([])
 }
   return (
 <Form> 
@@ -44,10 +49,10 @@ const handleDelete = () => {
       </Form.Group>    
     </Col>
   </Row>
-  <Button variant="success" type="button" onClick={e => handleAdd()}>
+  <Button variant="success" type="button" onClick={e => handleAdd()} disabled={title === "" || author === ""}>
         Add
       </Button>{' '}
-  <Button variant="danger" type="button" onClick={e => handleDelete()} >
+  <Button variant="danger" type="button" onClick={e => handleDelete()} disabled={checkedBooks.length === 0}>
         Delete
       </Button>
 </Form>

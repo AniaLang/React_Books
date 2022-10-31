@@ -20,7 +20,7 @@ return (
         <Card.Body>
             <Card.Title>BOOKS</Card.Title>
             <Card.Text></Card.Text>
-            <BookForm setBooks={setBooks} books={books} checkedBooks={checkedBooks} />
+            <BookForm setBooks={setBooks} books={books} checkedBooks={checkedBooks} setCheckedBooks={setCheckedBooks} />
             <BooksTable books={books} setBooks={setBooks} checkedBooks={checkedBooks} setCheckedBooks={setCheckedBooks}  />
         </Card.Body>
     </Card>
