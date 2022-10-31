@@ -32,6 +32,7 @@ return (
                 <th>#</th>
                 <th>Book Tittle</th>
                 <th>Book Author</th>
+                <th>Rating</th>
             </tr>
         </thead>
             <tbody>{books.map((book, index) =>  
@@ -45,7 +46,7 @@ return (
                     <td>{book.title}</td>
                     <td>{book.author}</td>
                     <td>
-                        <StarsRating/>
+                        <StarsRating book={book} setBooks={setBooks} books={books}/>
                     </td>
                 </tr>)}
             </tbody>

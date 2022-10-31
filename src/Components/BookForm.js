@@ -13,8 +13,9 @@ const handleAdd = () => {
   if(title === "" || author === ""){
     return
   }
+  const rate = 0
   const id = currentId + 1
-  const book = {title, author, id}
+  const book = {title, author, id, rate}
   setBooks([...books, book ])
   setCurrentId(id)
   setTitle("")
