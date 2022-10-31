@@ -4,7 +4,6 @@ import DefaultPage from './Pages/DefaultPage'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-
 function App() {
   return (
     <Container>

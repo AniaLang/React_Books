@@ -3,8 +3,9 @@ import Form from 'react-bootstrap/Form'
 import EditModal from './EditModal';
 import { useState } from 'react'
 
-function BooksTable({books, checkedBooks, setCheckedBooks}) {
+function BooksTable({books, checkedBooks, setCheckedBooks, setBooks}) {
     const [modalShow, setModalShow] = useState(false);
+    const [bookInModal, setBookInModal] = useState(null)
 
     const handleChange = (e, index) => {
         let copy = [...checkedBooks]
@@ -18,6 +19,10 @@ function BooksTable({books, checkedBooks, setCheckedBooks}) {
 
         setCheckedBooks(copy)
     }
+    const handleEditModal = (index) => {
+        setModalShow(true)
+        setBookInModal(books[index])
+    }
 
 return (
     <Table striped>
@@ -29,7 +34,7 @@ return (
             </tr>
         </thead>
             <tbody>{books.map((book, index) =>  
-                <tr key={book.id} onClick={() => setModalShow(true)}>
+                <tr key={book.id} onClick={() => handleEditModal(index)}>
                     <td>
                         <Form.Check
                             type='checkbox'
@@ -40,7 +45,12 @@ return (
                     <td>{book.author}</td>
                 </tr>)}
             </tbody>
-            <EditModal show={modalShow} onHide={() => setModalShow(false)}/>
+            {modalShow && <EditModal
+                books={books}
+                setBooks={setBooks}
+                bookInModal={bookInModal}
+                show={modalShow}
+                onHide={() => setModalShow(false)}/>}
     </Table>
 )
 }
