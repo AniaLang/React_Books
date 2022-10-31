@@ -5,9 +5,12 @@ import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 
 function BookForm ({books, setBooks, checkedBooks}) {
-const [title, setTitle] = useState("")
-const [author, setAuthor ] = useState("")
-const [currentId, setCurrentId] = useState(0)
+  const maxId = () => Math.max(...books.map(b => b.id))
+
+  const [title, setTitle] = useState("")
+  const [author, setAuthor ] = useState("")
+  const [currentId, setCurrentId] = useState(() => maxId())
+
 
 const handleAdd = () => {
   if(title === "" || author === ""){

@@ -2,8 +2,9 @@ import { Form } from 'react-bootstrap';
 import {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { Rate } from 'antd'
 
-function EditModal ({ show, onHide, bookInModal, books, setBooks}) {
+function EditModal ({ show, onHide, bookInModal, books, setBooks }) {
 const [titleEdited, setTitleEdited] = useState(bookInModal.title)
 const [authorEdited, setAuthorEdited] = useState(bookInModal.author)
 
@@ -14,7 +15,6 @@ const handleSaveChanges = (e) => {
   setBooks([...books])
   onHide()
 }
-
     return (
         <Modal
           show={show}
@@ -28,7 +28,7 @@ const handleSaveChanges = (e) => {
             </Modal.Title>
           </Modal.Header>
       <Modal.Body>
-        <h4>Edit Book</h4>
+        <Rate allowHalf value={bookInModal.rate} disabled/>
         <Form>
           <Form.Label>Title</Form.Label>
           <Form.Control onChange={e => setTitleEdited(e.target.value)} value={titleEdited}/>
